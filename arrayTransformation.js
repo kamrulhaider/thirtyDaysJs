@@ -39,3 +39,23 @@
   const result = filter(arr, fn);
   // console.log(result);
 }
+
+// Problem no: 2626
+{
+  var reduce = function (nums, fn, init) {
+    let prevVal = init;
+    for (let i = 0; i < nums.length; i++) {
+      const get = fn(prevVal, nums[i]);
+      prevVal = get;
+    }
+    return prevVal;
+  };
+
+  const nums = [1, 2, 3, 4];
+  const fn = function sum(accum, curr) {
+    return accum + curr * curr;
+  };
+  const init = 100;
+  const result = reduce(nums, fn, init);
+  // console.log(result);
+}

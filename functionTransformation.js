@@ -19,3 +19,24 @@
   const result = argumentsLength([1, 3, 4]);
   //    console.log(result)
 }
+
+// Problem no: 2666
+{
+  var once = function (fn) {
+    let callOnce = 0;
+    return function (...args) {
+      callOnce++;
+      if (callOnce > 1) {
+        return undefined;
+      } else {
+        return fn(...args);
+      }
+    };
+  };
+
+  let fn = (a, b, c) => a + b + c;
+  let onceFn = once(fn);
+
+  // console.log(onceFn(1, 2, 3));
+  // console.log(onceFn(2, 3, 6));
+}

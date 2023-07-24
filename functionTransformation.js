@@ -40,3 +40,36 @@
   // console.log(onceFn(1, 2, 3));
   // console.log(onceFn(2, 3, 6));
 }
+
+// Problem no: 2623
+{
+  function memoize(fn) {
+    const cache = new Map();
+    return function (...args) {
+      const key = args
+        .map((arg) =>
+          typeof arg === "object" && arg !== null
+            ? JSON.stringify(arg)
+            : `${arg}:${typeof arg}`
+        )
+        .join(",");
+      if (cache.has(key)) {
+        return cache.get(key);
+      } else {
+        const result = fn(...args);
+        cache.set(key, result);
+        return result;
+      }
+    };
+  }
+
+  let callCount = 0;
+  const memoizedFn = memoize(function (a, b) {
+    callCount += 1;
+    return a + b;
+  });
+
+  // console.log(memoizedFn(0, 0)); // 0
+  // console.log(memoizedFn(0, 0)); // 0
+  // console.log(callCount); // 1
+}
